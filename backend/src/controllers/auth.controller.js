@@ -2,7 +2,7 @@ import cloudinary from '../lib/cloudinary.js';
 import { generateToken } from '../lib/utils.js';
 import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
-// import cloudinary from '../lib/cloudinary.js';
+import cloudinary from '../lib/cloudinary.js';
 
 export const signup = async (req, res) => {
     const {fullName, email, password} = req.body;
@@ -25,7 +25,7 @@ export const signup = async (req, res) => {
         const newUser = new User({
             fullName ,
             email,
-            password: hashedPassword
+            password: hashedPassword,
         })
 
         if(newUser){
