@@ -8,9 +8,18 @@ import SettingsPage from './pages/SettingsPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 
 import { Routes, Route } from 'react-router-dom'
-
+import { useAuthStore } from './store/useAuthStore.js'
+import { useEffect } from 'react' 
 
 const App = () => {
+  const {authUser, checkAuth} = useAuthStore()
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log({authUser});
+
   return (
     <div>
 
