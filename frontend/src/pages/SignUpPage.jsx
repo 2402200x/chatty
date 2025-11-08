@@ -22,10 +22,23 @@ const SignUp = () => {
   
   const {signup, isSigningUp} = useAuthStore();
 
-  const validateForm = () => {}
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
+
+    return true;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  
+
+  const success = validateForm();
+
+    if (success === true) signup(formData);
+  };
 
   return (
 //     <div className='min-h-screen grid lg:grid-clos-2'>
@@ -140,6 +153,12 @@ const SignUp = () => {
 //   )
 // }
 
+
+
+
+
+
+
 <div className="min-h-screen grid lg:grid-cols-2">
       {/* left side */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
@@ -170,7 +189,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   className={`input input-bordered w-full pl-10`}
-                  placeholder="John Doe"
+                  placeholder="Anchal Swamy"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 />
