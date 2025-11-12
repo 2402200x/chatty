@@ -22,6 +22,7 @@ export const useAuthStore = create((set) => ({
             set({isCheckingAuth:false});
         }
     },
+
     signup: async (data) => {
     set({isSignUp: true});
     try {
@@ -33,5 +34,15 @@ export const useAuthStore = create((set) => ({
     } finally {
         set ({isSignUp: false});
     }
+    },
+
+    logout: async () => {
+        try {
+            set({authUser: null});
+            toast.success("Logged out successfully");
+        } catch (error) {
+           toast.error(error.response.data.message); 
+        }
+        
     }
 }))
